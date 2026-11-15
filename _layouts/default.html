@@ -1,0 +1,16 @@
+<!doctype html>
+{%- assign rtl = false -%}
+{%- if page.lang == "fa" or page.dir == "rtl" -%}{%- assign rtl = true -%}{%- endif -%}
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  {%- include head.html rtl=rtl -%}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  {%- include header.html -%}
+  <main id="main" class="wrap">
+    {{ content }}
+  </main>
+  {%- include footer.html -%}
+</body>
+</html>

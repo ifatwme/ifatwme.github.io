@@ -1,0 +1,65 @@
+---
+layout: default
+---
+{%- assign a = site.author -%}
+<section class="hero">
+  {%- if a.avatar and a.avatar != "" %}
+  <img class="avatar" src="{{ a.avatar | relative_url }}" alt="{{ a.name }}" width="112" height="112">
+  {%- else %}
+  {%- assign parts = a.name | split: " " %}
+  <div class="avatar monogram" aria-hidden="true">{{ parts.first | slice: 0 }}{{ parts.last | slice: 0 }}</div>
+  {%- endif %}
+  <div>
+    <h1>{{ a.name }}</h1>
+    <p class="tagline">{{ site.tagline }}</p>
+  </div>
+</section>
+
+<div class="prose intro">
+  {{ content }}
+</div>
+{% include social-links.html %}
+
+{%- assign featured = site.data.projects | where: "featured", true %}
+{%- if featured.size > 0 %}
+<section class="section">
+  <div class="section-head">
+    <h2>Selected projects</h2>
+    <a class="more" href="{{ '/projects/' | relative_url }}">All projects →</a>
+  </div>
+  <div class="cards">
+    {%- for p in featured limit: 4 %}
+    {% include project-card.html project=p %}
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+
+{%- if site.posts.size > 0 %}
+<section class="section">
+  <div class="section-head">
+    <h2>Recent writing</h2>
+    <a class="more" href="{{ '/blog/' | relative_url }}">Archive →</a>
+  </div>
+  <ul class="post-list">
+    {%- for post in site.posts limit: 5 %}
+    {% include post-item.html post=post %}
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}
+
+{%- assign pubs = site.data.publications | size %}
+{%- if pubs > 0 %}
+<section class="section">
+  <div class="section-head">
+    <h2>Research</h2>
+    <a class="more" href="{{ '/research/' | relative_url }}">All →</a>
+  </div>
+  <ol class="pubs">
+    {%- for pub in site.data.publications limit: 3 %}
+    {% include publication.html pub=pub %}
+    {%- endfor %}
+  </ol>
+</section>
+{%- endif %}

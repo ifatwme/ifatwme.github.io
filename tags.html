@@ -1,0 +1,23 @@
+---
+title: Tags
+permalink: /blog/tags/
+description: Blog posts grouped by tag.
+---
+{%- assign tags = site.tags | sort %}
+{%- if tags.size == 0 %}
+<p class="muted">No tags yet.</p>
+{%- else %}
+<ul class="tags tag-index">
+  {%- for tag in tags %}
+  <li><a href="#{{ tag[0] | slugify }}">{{ tag[0] }} <span class="count">{{ tag[1].size }}</span></a></li>
+  {%- endfor %}
+</ul>
+{%- for tag in tags %}
+<h2 class="year-head" id="{{ tag[0] | slugify }}">{{ tag[0] }}</h2>
+<ul class="post-list">
+  {%- for post in tag[1] %}
+  {% include post-item.html post=post %}
+  {%- endfor %}
+</ul>
+{%- endfor %}
+{%- endif %}

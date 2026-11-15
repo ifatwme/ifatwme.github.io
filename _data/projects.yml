@@ -1,0 +1,103 @@
+# Projects shown on /projects/ (and on the home page when featured: true).
+# Order here = order on the site. Only `title` and `summary` are required.
+#
+#   title:     Project name
+#   year:      "2026" or "2025 – 2026"
+#   summary:   One or two sentences (Markdown allowed)
+#   tags:      [Python, Docker, ...]
+#   featured:  true  -> big card, shown on the home page (first 4)
+#   repo:      https://github.com/...           (omit for private code)
+#   private:   true  -> "Private code" badge (use when there is no public repo)
+#   demo:      https://...                      a PUBLIC live demo or dashboard
+#   writeup:   /blog/2026/some-post/            a blog post about the project
+#   paper:     https://...                      paper / preprint / report PDF
+#   status:    "in progress"                    any short label
+#
+# Example of a private project:
+# - title: Something I can't open-source
+#   year: "2026"
+#   summary: What it does and what I learned building it.
+#   tags: [Python, PyTorch]
+#   private: true
+#   writeup: /blog/2026/something/
+
+- title: CS Paper Radar
+  year: "2026"
+  featured: true
+  summary: >-
+    Tracks every new arXiv paper in computer science each day, picks the weekly top papers with a
+    transparent, evidence-backed score (citations, community upvotes, code adoption, venue) and
+    turns any topic into a briefing: what's new, emerging terms, research directions and growth.
+  tags: [Python, FastAPI, SQLite FTS5, Sentence embeddings, arXiv API]
+  repo: https://github.com/ifatwme/cs-paper-radar
+
+- title: AI & Robotics Social-Media Trends
+  year: "2026"
+  featured: true
+  summary: >-
+    A weekly, fully automated statistical and ML analysis of how people talk about AI and robotics
+    on Bluesky, Reddit, Hacker News and Mastodon: negative-binomial GLMs, burst detection,
+    embedding-based topic clustering and sentiment, published as a static dashboard.
+  tags: [Python, Statistics, NLP, Topic modelling, GitHub Actions]
+  repo: https://github.com/ifatwme/ai-robotics-trends
+  demo: https://ifatwme.github.io/ai-robotics-trends/
+
+- title: EmoTrack, an emotion × activity tracker
+  year: "2026"
+  featured: true
+  summary: >-
+    A local computer-vision system that relates facial expression (YuNet + MobileFaceNet on
+    OpenCV DNN, ~26 ms per frame on CPU) to what is in focus on the desktop. Dashboard,
+    daily/weekly reports and an API made for an LLM "mentor". No frame is ever stored.
+  tags: [Computer vision, OpenCV, FastAPI, SQLite, Docker]
+  repo: https://github.com/ifatwme/emotion-activity-tracker
+
+- title: Persian multimodal product search
+  year: "2025 – 2026"
+  featured: true
+  summary: >-
+    My B.Sc. final project: find Digikala products by describing them in Persian or uploading a
+    photo (CLIPfa embeddings in Weaviate), then ask a local Qwen2.5 shopping assistant running on
+    llama.cpp, CPU only. Later rebuilt as a containerised, tested application.
+  tags: [CLIP, Vector search, Weaviate, llama.cpp, Streamlit]
+  repo: https://github.com/ifatwme/vector_search
+
+- title: paperx
+  year: "2024"
+  summary: >-
+    A tool for reading and querying research papers: GROBID parses the PDF into structure and a
+    Llama 2 model answers questions about it.
+  tags: [LLM, GROBID, Docker]
+  repo: https://github.com/ifatwme/paperx
+
+- title: Privacy-preserving data mining
+  year: "2024"
+  summary: >-
+    Mining association rules from a dataset and then hiding the sensitive ones with sanitisation
+    techniques. Data-mining course project.
+  tags: [Python, Data mining]
+  repo: https://github.com/ifatwme/PPDM
+
+- title: N-Queens visualiser
+  year: "2024"
+  summary: >-
+    A Pygame visualisation of the N-Queens problem solved by min-conflicts local search, built so
+    other solvers (backtracking, genetic algorithms, simulated annealing) can be plugged in.
+  tags: [Python, Pygame, Search]
+  repo: https://github.com/ifatwme/nQueen
+
+- title: Transportation system (UML + UI)
+  year: "2023"
+  summary: >-
+    A full set of UML diagrams and an Angular UI for a transportation system. Software-engineering
+    team project.
+  tags: [UML, Angular, TypeScript]
+  repo: https://github.com/ifatwme/Transportation-UML
+
+- title: Data structures in C++
+  year: "2022"
+  summary: >-
+    Implementations from my data-structures course: linked lists, stacks, queues, trees, sparse
+    matrices, polynomial arithmetic and expression conversion.
+  tags: [C++]
+  repo: https://github.com/ifatwme/Data-Structure

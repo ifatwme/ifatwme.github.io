@@ -1,0 +1,22 @@
+{%- assign pub = include.pub -%}
+{%- assign me = site.author.name -%}
+{%- capture me_bold %}<strong>{{ me }}</strong>{% endcapture -%}
+<li class="pub">
+  <div class="pub-title">{{ pub.title }}</div>
+  {%- if pub.authors %}<div class="pub-authors">{{ pub.authors | replace: me, me_bold }}</div>{% endif %}
+  <div class="pub-venue">
+    {%- if pub.venue %}<em>{{ pub.venue }}</em>{% endif %}
+    {%- if pub.year %}{% if pub.venue %}, {% endif %}{{ pub.year }}{% endif %}
+    {%- if pub.status %} <span class="badge">{{ pub.status }}</span>{% endif %}
+  </div>
+  <div class="links">
+    {%- if pub.pdf %}<a href="{{ pub.pdf | relative_url }}">{% include icon.html name="file" %}PDF</a>{% endif %}
+    {%- if pub.arxiv %}<a href="https://arxiv.org/abs/{{ pub.arxiv }}">{% include icon.html name="external" %}arXiv</a>{% endif %}
+    {%- if pub.doi %}<a href="https://doi.org/{{ pub.doi }}">{% include icon.html name="external" %}DOI</a>{% endif %}
+    {%- if pub.code %}<a href="{{ pub.code }}">{% include icon.html name="code" %}Code</a>{% endif %}
+    {%- if pub.writeup %}<a href="{{ pub.writeup | relative_url }}">{% include icon.html name="text" %}Blog post</a>{% endif %}
+  </div>
+  {%- if pub.abstract %}
+  <details><summary>Abstract</summary><p>{{ pub.abstract }}</p></details>
+  {%- endif %}
+</li>

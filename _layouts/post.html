@@ -1,0 +1,37 @@
+---
+layout: default
+---
+{%- assign words = content | strip_html | number_of_words -%}
+{%- assign minutes = words | divided_by: 200 | plus: 1 -%}
+{%- assign rtl = false -%}
+{%- if page.lang == "fa" or page.dir == "rtl" -%}{%- assign rtl = true -%}{%- endif -%}
+<article class="post">
+  <div class="post-body"{% if rtl %} dir="rtl" lang="{{ page.lang | default: 'fa' }}"{% endif %}>
+  <header class="page-header">
+    <h1>{{ page.title }}</h1>
+    <p class="meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+      {%- if page.updated %} · updated <time datetime="{{ page.updated | date_to_xmlschema }}">{{ page.updated | date: "%B %-d, %Y" }}</time>{% endif %}
+      · {{ minutes }} min read
+    </p>
+    {%- if page.tags.size > 0 %}
+    <ul class="tags">
+      {%- for t in page.tags %}<li><a href="{{ '/blog/tags/' | relative_url }}#{{ t | slugify }}">{{ t }}</a></li>{% endfor %}
+    </ul>
+    {%- endif %}
+  </header>
+
+  <div class="prose">
+    {{ content }}
+  </div>
+  </div>
+
+  <nav class="post-nav" aria-label="More posts">
+    {%- if page.previous %}
+    <a class="prev" href="{{ page.previous.url | relative_url }}"><span>← Older</span>{{ page.previous.title }}</a>
+    {%- else %}<span></span>{% endif %}
+    {%- if page.next %}
+    <a class="next" href="{{ page.next.url | relative_url }}"><span>Newer →</span>{{ page.next.title }}</a>
+    {%- endif %}
+  </nav>
+</article>

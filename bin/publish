@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Publish a draft: move _drafts/x.md to _posts/YYYY-MM-DD-x.md and set its date to now.
+#   bin/publish _drafts/my-post.md     (or: make publish f=_drafts/my-post.md)
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+src="${1:-}"
+if [[ -z "$src" || ! -f "$src" ]]; then
+  echo "Usage: bin/publish _drafts/<file>.md" >&2
+  ls _drafts/*.md 2>/dev/null | sed 's/^/  /' >&2 || true
+  exit 1
+fi
+
+dest="_posts/$(date +%F)-$(basename "$src")"
+[[ -e "$dest" ]] && { echo "Already exists: $dest" >&2; exit 1; }
+
+now="$(date '+%Y-%m-%d %H:%M %z')"
+if grep -q '^date:' "$src"; then
+  sed -i "0,/^date:.*/s//date: $now/" "$src"
+fi
+mkdir -p _posts
+git mv "$src" "$dest" 2>/dev/null || mv "$src" "$dest"
+echo "Published: $dest"

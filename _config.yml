@@ -1,53 +1,64 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# ─────────────────────────────────────────────────────────────────────────────
+#  About you — edit freely. (Restart `make serve` after changing this file.)
+# ─────────────────────────────────────────────────────────────────────────────
+title: Fatemeh Ghasemi
+tagline: Computer engineer · machine learning and the systems around it
+description: >-
+  Personal site of Fatemeh Ghasemi: computer engineer working on machine
+  learning and the engineering around it. Writing, projects and research.
 
-title: ifatwme's Portfolio
-email: ifatwmeghasemi@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Hi there! I am ifatwme (Fatemeh Ghasemi).
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://ifatwme.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: ifatwme
-github_username:  ifatwme
+author:
+  name: Fatemeh Ghasemi
+  email: ifatwmeghasemi@gmail.com
+  avatar: /assets/img/avatar.jpg   # leave empty to show initials instead
+  cv:                              # e.g. /assets/files/cv.pdf  (empty = no CV link)
 
-# Build settings
-theme: minima
+# Profiles shown as icons on the home page and in the footer.
+# Comment out a line to hide it; uncomment to add one.
+profiles:
+  github: ifatwme
+  linkedin: fatwme
+  # scholar: https://scholar.google.com/citations?user=XXXX
+  # orcid: 0000-0000-0000-0000
+
+url: https://ifatwme.github.io
+baseurl: ""
+lang: en
+timezone: Asia/Tehran
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  Build settings — rarely need touching.
+# ─────────────────────────────────────────────────────────────────────────────
+permalink: /blog/:year/:title/
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+feed:
+  path: feed.xml
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+  - scope: { path: "" }
+    values: { layout: page }
+
+exclude:
+  - README.md
+  - Makefile
+  - docker-compose.yml
+  - bin/
+  - Gemfile
+  - Gemfile.lock
+  - .ruby-version
+  - vendor/
+  - .bundle/
+  - .jekyll-cache/
+  - node_modules/

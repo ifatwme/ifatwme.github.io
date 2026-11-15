@@ -1,0 +1,16 @@
+---
+title: Research
+permalink: /research/
+description: Papers, preprints and technical reports.
+lead: Papers, preprints and technical reports.
+---
+{%- assign pubs = site.data.publications | size %}
+{%- if pubs == 0 %}
+<p class="muted">Nothing here yet. Papers and preprints will be listed here as they appear.</p>
+{%- else %}
+<ol class="pubs">
+  {%- for pub in site.data.publications %}
+  {% include publication.html pub=pub %}
+  {%- endfor %}
+</ol>
+{%- endif %}

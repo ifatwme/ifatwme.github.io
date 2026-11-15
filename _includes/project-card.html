@@ -1,0 +1,20 @@
+{%- assign p = include.project -%}
+{%- assign main_link = p.repo | default: p.demo | default: p.writeup -%}
+<article class="card{% if include.compact %} compact{% endif %}">
+  <div class="card-head">
+    <h3>{% if main_link %}<a href="{{ main_link | relative_url }}">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}</h3>
+    {%- if p.year %}<span class="year">{{ p.year }}</span>{% endif %}
+  </div>
+  <div class="summary">{{ p.summary | markdownify }}</div>
+  {%- if p.tags and include.compact == nil %}
+  <ul class="tags">{% for t in p.tags %}<li>{{ t }}</li>{% endfor %}</ul>
+  {%- endif %}
+  <div class="links">
+    {%- if p.status %}<span class="badge">{{ p.status }}</span>{% endif %}
+    {%- if p.repo %}<a href="{{ p.repo }}">{% include icon.html name="code" %}Code</a>{% endif %}
+    {%- if p.private %}<span class="badge" title="The code is not public. Happy to walk through it on request.">{% include icon.html name="lock" %}Private code</span>{% endif %}
+    {%- if p.demo %}<a href="{{ p.demo }}">{% include icon.html name="external" %}Live</a>{% endif %}
+    {%- if p.writeup %}<a href="{{ p.writeup | relative_url }}">{% include icon.html name="text" %}Write-up</a>{% endif %}
+    {%- if p.paper %}<a href="{{ p.paper }}">{% include icon.html name="file" %}Paper</a>{% endif %}
+  </div>
+</article>

@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# Create a new blog post (or draft) with the front matter filled in.
+#   bin/new-post "My post title"            -> _posts/YYYY-MM-DD-my-post-title.md
+#   bin/new-post "My post title" --draft    -> _drafts/my-post-title.md  (not published)
+#   SLUG=my-slug bin/new-post "عنوان فارسی"  -> pick the URL slug yourself (e.g. Persian titles)
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+title="${1:-}"
+if [[ -z "$title" ]]; then
+  echo 'Usage: bin/new-post "Post title" [--draft]   (or: make post t="Post title")' >&2
+  exit 1
+fi
+draft=false
+[[ "${2:-}" == "--draft" ]] && draft=true
+
+slug="${SLUG:-$(printf '%s' "$title" | iconv -f utf-8 -t ascii//TRANSLIT 2>/dev/null \
+  | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//' || true)}"
+[[ -n "$slug" ]] || slug="post-$(date +%Y%m%d-%H%M)"
+
+if $draft; then
+  file="_drafts/$slug.md"
+else
+  file="_posts/$(date +%F)-$slug.md"
+fi
+mkdir -p "$(dirname "$file")"
+if [[ -e "$file" ]]; then
+  echo "Already exists: $file" >&2
+  exit 1
+fi
+
+lang_line="# lang: fa             # uncomment for a Persian (right-to-left) post"
+if printf '%s' "$title" | grep -qP '[\x{0600}-\x{06FF}]' 2>/dev/null; then
+  lang_line="lang: fa"
+fi
+
+cat > "$file" <<EOF
+---
+title: "${title//\"/\\\"}"
+date: $(date '+%Y-%m-%d %H:%M %z')
+description: ""        # one sentence; shown in post lists and link previews
+tags: []               # e.g. [machine-learning, notes]
+# math: true           # enable LaTeX: \$\$ E = mc^2 \$\$
+$lang_line
+---
+
+<!--
+Markdown cheat sheet (this comment is not shown on the site; delete it whenever you like):
+
+## A heading
+Some **bold** and *italic* text, a [link](https://example.com), and \`inline code\`.
+- a list item
+![Image description](/assets/img/posts/your-image.jpg)   (put the file in assets/img/posts/)
+\`\`\`python
+print("code blocks get syntax highlighting")
+\`\`\`
+-->
+
+Start writing here.
+EOF
+
+echo "Created $file"

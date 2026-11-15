@@ -1,0 +1,24 @@
+---
+title: Projects
+permalink: /projects/
+description: Things I have built, from course projects to end-to-end ML systems.
+lead: Things I have built, from course projects to end-to-end ML systems.
+---
+{%- comment -%} Edit the list in _data/projects.yml, not here. {%- endcomment -%}
+{%- assign featured = site.data.projects | where: "featured", true %}
+{%- assign others = site.data.projects | where_exp: "p", "p.featured != true" %}
+
+<div class="cards">
+  {%- for p in featured %}
+  {% include project-card.html project=p %}
+  {%- endfor %}
+</div>
+
+{%- if others.size > 0 %}
+<h2 class="year-head">More projects</h2>
+<div class="cards list">
+  {%- for p in others %}
+  {% include project-card.html project=p compact=true %}
+  {%- endfor %}
+</div>
+{%- endif %}

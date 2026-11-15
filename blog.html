@@ -1,0 +1,22 @@
+---
+title: Blog
+permalink: /blog/
+description: Notes on what I'm learning, building and thinking about.
+lead: Notes on what I'm learning, building and thinking about.
+---
+{%- if site.posts.size == 0 %}
+<p class="muted">Nothing published yet. The first post is on its way.</p>
+{%- else %}
+{%- if site.tags.size > 0 %}
+<p class="tag-bar"><a href="{{ '/blog/tags/' | relative_url }}">Browse by tag →</a></p>
+{%- endif %}
+{%- assign by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+{%- for year in by_year %}
+<h2 class="year-head">{{ year.name }}</h2>
+<ul class="post-list">
+  {%- for post in year.items %}
+  {% include post-item.html post=post %}
+  {%- endfor %}
+</ul>
+{%- endfor %}
+{%- endif %}

@@ -1,0 +1,23 @@
+{%- comment -%}Profile links from _config.yml. include.compact = icons only.{%- endcomment -%}
+{%- assign p = site.profiles -%}
+<ul class="social{% if include.compact %} compact{% endif %}">
+  {%- if p.github %}
+  <li><a href="https://github.com/{{ p.github }}" rel="me">{% include icon.html name="github" %}<span>GitHub</span></a></li>
+  {%- endif %}
+  {%- if p.linkedin %}
+  <li><a href="https://www.linkedin.com/in/{{ p.linkedin }}" rel="me">{% include icon.html name="linkedin" %}<span>LinkedIn</span></a></li>
+  {%- endif %}
+  {%- if p.scholar %}
+  <li><a href="{{ p.scholar }}" rel="me">{% include icon.html name="scholar" %}<span>Scholar</span></a></li>
+  {%- endif %}
+  {%- if p.orcid %}
+  <li><a href="https://orcid.org/{{ p.orcid }}" rel="me">{% include icon.html name="orcid" %}<span>ORCID</span></a></li>
+  {%- endif %}
+  {%- if site.author.email %}
+  <li><a href="mailto:{{ site.author.email }}">{% include icon.html name="mail" %}<span>Email</span></a></li>
+  {%- endif %}
+  {%- if site.author.cv and site.author.cv != "" %}
+  <li><a href="{{ site.author.cv | relative_url }}">{% include icon.html name="file" %}<span>CV</span></a></li>
+  {%- endif %}
+  <li><a href="{{ '/feed.xml' | relative_url }}">{% include icon.html name="rss" %}<span>RSS</span></a></li>
+</ul>
